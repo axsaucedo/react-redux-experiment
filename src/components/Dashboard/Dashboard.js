@@ -1,29 +1,30 @@
-import React from 'react'
-import classes from './Dashboard.scss'
+"use strict";
 
-export const Dashboard = (props) => (
-  <div>
-    <h2 className={classes.dashboardContainer}>
-      Dashboard:
-      {' '}
-      <span className={classes['dashboard--green']}>
-        {props.dashboard}
-      </span>
-    </h2>
-    <button className='btn btn-default' onClick={props.increment}>
-      Increment
-    </button>
-    {' '}
-    <button className='btn btn-default' onClick={props.doubleAsync}>
-      Double (Async)
-    </button>
-  </div>
-)
+import React from 'react';
+import classes from './Dashboard.scss';
+
+export const Dashboard = (props) => {
+
+  const listJSX = props.dashboard.dashboardItems.map((item, i) => {
+    return <h4 key={i}>{item.label}</h4>;
+  });
+
+  return (
+    <div>
+      <h2 className={classes.dashboardContainer}>
+        Dashboard visits:
+        {' '}
+        <span className={classes['dashboard--green']}>
+          {props.dashboard.visitsCount}
+        </span>
+      </h2>
+      {listJSX}
+    </div>
+  );
+};
 
 Dashboard.propTypes = {
-  dashboard: React.PropTypes.number.isRequired,
-  doubleAsync: React.PropTypes.func.isRequired,
-  increment: React.PropTypes.func.isRequired
-}
+  dashboard: React.PropTypes.object.isRequired
+};
 
-export default Dashboard
+export default Dashboard;
